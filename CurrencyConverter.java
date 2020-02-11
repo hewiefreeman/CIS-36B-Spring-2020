@@ -2,9 +2,15 @@ import java.util.Scanner;
 
 public class CurrencyConverter {
 
-	private double  rate; // Canversion rate
-	private String  type; // Conversion rate type name
-	private Scanner scanner;
+	private static double  rate;       // Canversion rate
+	private static String  type;       // Conversion rate type name
+	private static String  typeSymbol; // Conversion rate type symbol
+	private static Scanner scanner;    // Console scanner
+
+	// Constants
+	private static final String YEN_SYMBOL  = "¥";
+	private static final String EURO_SYMBOL = "€";
+	private static final String PESO_SYMBOL = "₱";
 	
 	private static void main(String[] params) {
 		scanner = new Scanner(System.in);
@@ -40,18 +46,21 @@ public class CurrencyConverter {
 					// Yen
 					rate = 108.67;
 					type = "Yen";
+					typeSymbol = YEN_SYMBOL;
 					break;
 
 				case 2:
 					// Euro
 					rate = 0.90;
 					type = "Euro";
+					typeSymbol = EURO_SYMBOL;
 					break;
 
 				case 3:
 					// Peso
 					rate = 18.80;
 					type = "Peso";
+					typeSymbol = PESO_SYMBOL;
 					break;
 
 				case 4:
@@ -64,7 +73,8 @@ public class CurrencyConverter {
 					continue;
 			}
 			// If convertMenu failed, scanner threw an exception. Exit
-			if !convertMenu() {
+			if (!convertMenu()) {
+				System.out.println("\nCurrency Converter has run into an error and is exiting...");
 				return;
 			}
 		}
@@ -101,8 +111,7 @@ public class CurrencyConverter {
 				continue;
 			}
 			
-			System.out.println("\n Amount in " + type + ": " + dollars);
+			System.out.println("\n$" + dollars + " in " + type + ": " + typeSymbol + (dollars * rate));
 		}
-		return true;
 	}
 }
